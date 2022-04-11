@@ -2,6 +2,7 @@ from distutils.command.upload import upload
 from tokenize import blank_re
 from django.db import models
 
+
 # Create your models here.
 class Libro(models.Model):
     id = models.AutoField(primary_key=True)
@@ -11,3 +12,6 @@ class Libro(models.Model):
     def __str__(self) -> str:
      fila="Titulo: " + self.titulo + " - " "Descripcíon: " + self.descripcion
      return fila
+     def delete(self,using=None,kepp_parents=False):
+         self.imagen.storage.delete(self.imagen.name)
+         super().delete()
